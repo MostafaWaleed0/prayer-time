@@ -1,0 +1,26 @@
+{
+  "logo": "prayer",
+  "header": {
+    "prayer times": "/prayer-times",
+    "Qibla": "/qibla",
+    "moon today": "/moon-today",
+    "hijri calendar": "/hijri-calendar"
+  },
+  "praying": {
+    "time": "Time now",
+    "nextPrayer": "Upcoming Prayer",
+    "date": "Date",
+    "hijri": "Hijri",
+    "location": "Location",
+    "upcomingPrayer": "Upcoming Prayer",
+    "timezone": "Timezone",
+    "line": "Latitude, Longitude"
+  },
+  "home": {
+    "hadith": {
+      "heading": "today hadith",
+      "source": "Reference",
+      "hadith": "Hadith"
+    }
+  }
+}

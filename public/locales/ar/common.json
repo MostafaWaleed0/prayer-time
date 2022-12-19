@@ -1,0 +1,26 @@
+{
+  "logo": "الصلاة",
+  "header": {
+    "مواقيت الصلاة": "/prayer-times",
+    "إتجاه القبلة": "/qibla",
+    "القمر اليوم": "/moon-today",
+    "التاريخ الهجري": "/hijri-calendar"
+  },
+  "praying": {
+    "time": "الوقت الأن",
+    "nextPrayer": "الصلاة القادمة",
+    "date": "التاريخ",
+    "hijri": "الهجري",
+    "location": "الموقع",
+    "upcomingPrayer": "الصلاة القادمة",
+    "timezone": "المنطقة الزمنية",
+    "line": "خط الطول/العرض"
+  },
+  "home": {
+    "hadith": {
+      "heading": "حديث اليوم",
+      "source": "المصدر",
+      "hadith": "رقم الحديث"
+    }
+  }
+}
