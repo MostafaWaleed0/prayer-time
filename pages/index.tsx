@@ -140,7 +140,7 @@ export async function getServerSideProps({ req }) {
   const forwarded = req.headers['x-forwarded-for'];
   const ip = typeof forwarded === 'string' ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
 
-  const geolocation = await loadGeolocation(`https://ipapi.co/${ip}/json`);
+  const geolocation = await loadGeolocation(ip);
 
   const timezone = await fetch(
     `https://api.aladhan.com/v1/timingsByCity?city=${convertToLink(geolocation.city, geolocation.country_name)}`
