@@ -31,10 +31,10 @@ export default function Container(props: { [x: string]: any; children: React.Rea
           src="/static/images/window.svg"
           width={100}
           height={100}
-          className="fixed top-0 min-h-screen w-full -z-50"
+          className="fixed top-0 min-h-screen w-full -z-50 object-cover"
           alt={''}
           quality={100}
-          aria-hidden={true} 
+          aria-hidden={true}
         />
         <Header />
         <main id="main-content" tabIndex={-1}>
