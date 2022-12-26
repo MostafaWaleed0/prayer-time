@@ -26,7 +26,7 @@ export default function Container(props: { [x: string]: any; children: React.Rea
         <title>{meta.title}</title>
         <link rel="canonical" href={`https://www..${router.asPath}`} />
       </Head>
-      <div className={inter.className + ' app'} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+      <div className={`${inter.className} app`} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         <Image
           src="/static/images/window.svg"
           width={100}
