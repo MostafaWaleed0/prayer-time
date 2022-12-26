@@ -83,7 +83,7 @@ export default function Home({
   ];
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<h1>Loading</h1>}>
       <Container>
         <article>
           <PrayerView
