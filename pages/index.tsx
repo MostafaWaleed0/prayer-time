@@ -151,6 +151,12 @@ export async function getServerSideProps({ req }) {
   const timezoneData = await timezone.json();
   const calendarByCityData = await calendarByCity.json();
 
+  if (!geolocation) {
+    return {
+      notFound: true,
+    }
+  }
+
   return {
     props: {
       timezoneData,
