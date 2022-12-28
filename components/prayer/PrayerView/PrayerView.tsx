@@ -6,7 +6,7 @@ import { PrayersInfo } from 'components/prayer';
 
 export default function PrayerItem({ prayers, geolocation, date, currentTime, locale }: PrayerItemsProps) {
   const language = lang();
-  let firstUpcomingPrayer: any;
+  let firstUpcomingPrayer: number;
   const arrayOfRemainingTimeForUpcomingPrayer: number[] = [];
   const arrayOfUpcomingPrayers: boolean[] = [];
 
