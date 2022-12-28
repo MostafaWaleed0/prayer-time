@@ -6,7 +6,6 @@ import { PrayersInfo } from 'components/prayer';
 
 export default function PrayerItem({ prayers, geolocation, date, currentTime, locale }: PrayerItemsProps) {
   const language = lang();
-  const data = language.praying;
   let firstUpcomingPrayer: any;
   const arrayOfRemainingTimeForUpcomingPrayer: number[] = [];
   const arrayOfUpcomingPrayers: boolean[] = [];
@@ -15,8 +14,7 @@ export default function PrayerItem({ prayers, geolocation, date, currentTime, lo
     <div className="grid lg:grid-cols-2 gap-20 items-center lg:gap-40 space-y-4 font-medium w-full">
       <ol role="list" className="space-y-2 order-1 lg:-order-1">
         {prayers &&
-          prayers.map(({ en, ar, style, icon, prayerHour }, i: number) => {
-            const nameOfPrayer = locale === 'en' ? en : ar;
+          prayers.map(({ name, style, icon, prayerHour }, i: number) => {
             const secondsOfTheDay = convertToSeconds('24:00:00');
             const secondsOfTheUpcomingPrayer = convertToSeconds(prayerHour);
             const secondsFromTheBeginningOfTheDayToTheCurrentMoment = convertToSeconds(currentTime);
@@ -39,11 +37,11 @@ export default function PrayerItem({ prayers, geolocation, date, currentTime, lo
             } rounded-md px-3 py-6 ${style} -translate-x-1/2 -translate-y-1/2`;
 
             return (
-              <li key={en} className={`p-4 rounded-[10px] relative ${style}`}>
+              <li key={name} className={`p-4 rounded-[10px] relative ${style}`}>
                 <div className="flex items-center justify-between" dir="ltr">
                   <div className="flex items-center justify-center space-x-5">
                     {icon}
-                    <div className="px-4">{nameOfPrayer}</div>
+                    <div className="px-4">{name}</div>
                   </div>
                   <time dateTime={prayerHour}>{secondsToHm(secondsOfTheUpcomingPrayer)}</time>
                 </div>
@@ -67,7 +65,7 @@ export default function PrayerItem({ prayers, geolocation, date, currentTime, lo
         prayers={prayers}
         currentTime={currentTime}
         geolocation={geolocation}
-        data={data}
+        data={language}
         date={date}
         locale={locale}
         firstUpcomingPrayer={firstUpcomingPrayer}

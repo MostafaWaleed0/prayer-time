@@ -6,6 +6,14 @@
     "القمر اليوم": "/moon-today",
     "التاريخ الهجري": "/hijri-calendar"
   },
+  "prayers": {
+    "fajr": "الفجر",
+    "sunrise": "الشروق",
+    "dhuhr": "الظهر",
+    "asr": "العصر",
+    "maghrib": "المغرب",
+    "isha": "العشاء"
+  },
   "praying": {
     "time": "الوقت الأن",
     "nextPrayer": "الصلاة القادمة",

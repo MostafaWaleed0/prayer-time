@@ -6,6 +6,14 @@
     "moon today": "/moon-today",
     "hijri calendar": "/hijri-calendar"
   },
+  "prayers": {
+    "fajr": "Fajr",
+    "sunrise": "Sunrise",
+    "dhuhr": "Dhuhr",
+    "asr": "Asr",
+    "maghrib": "Maghrib",
+    "isha": "Isha"
+  },
   "praying": {
     "time": "Time now",
     "nextPrayer": "Upcoming Prayer",

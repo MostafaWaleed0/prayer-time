@@ -2,8 +2,7 @@ export type PrayersProps = {
   prayerHour: string;
   style: string;
   icon: JSX.Element;
-  ar: string;
-  en: string;
+  name: string;
 };
 
 export type TimezoneProps = {

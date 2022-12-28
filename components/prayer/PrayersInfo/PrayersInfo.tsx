@@ -17,11 +17,11 @@ export default function PrayersInfo({ prayers, firstUpcomingPrayer, geolocation,
         <table className="text-md md:text-xl w-full">
           <tbody className="table-cell">
             <tr>
-              <td className="after:content-[':'] after:mx-1 capitalize">{data?.location}</td>
+              <td className="after:content-[':'] after:mx-1 capitalize">{data.praying?.location}</td>
               <td>{geolocation.city}</td>
             </tr>
             <tr>
-              <td className="after:content-[':'] after:mx-1 capitalize">{data?.time}</td>
+              <td className="after:content-[':'] after:mx-1 capitalize">{data.praying?.time}</td>
               <td>
                 <time
                   dateTime={date.toLocaleTimeString('en', {
@@ -42,7 +42,7 @@ export default function PrayersInfo({ prayers, firstUpcomingPrayer, geolocation,
               </td>
             </tr>
             <tr>
-              <td className="after:content-[':'] after:mx-1 capitalize">{data?.date}</td>
+              <td className="after:content-[':'] after:mx-1 capitalize">{data.praying?.date}</td>
               <td>
                 <Suspense fallback={null}>
                   {new Intl.DateTimeFormat(locale, {
@@ -54,7 +54,7 @@ export default function PrayersInfo({ prayers, firstUpcomingPrayer, geolocation,
               </td>
             </tr>
             <tr>
-              <td className="after:content-[':'] after:mx-1 capitalize">{data?.hijri}</td>
+              <td className="after:content-[':'] after:mx-1 capitalize">{data.praying?.hijri}</td>
               <td>
                 {new Intl.DateTimeFormat(`${locale}-TN-u-ca-islamic-umalqura`, {
                   day: '2-digit',
@@ -65,19 +65,11 @@ export default function PrayersInfo({ prayers, firstUpcomingPrayer, geolocation,
               </td>
             </tr>
             <tr>
-              <td className="after:content-[':'] after:mx-1 capitalize">{data?.upcomingPrayer}</td>
-              <td>
-                {firstUpcomingPrayer > 0
-                  ? locale === 'en'
-                    ? prayers[firstUpcomingPrayer].en
-                    : prayers[firstUpcomingPrayer].ar
-                  : locale === 'en'
-                  ? 'Fajr'
-                  : 'الفجر'}
-              </td>
+              <td className="after:content-[':'] after:mx-1 capitalize">{data.praying?.upcomingPrayer}</td>
+              <td>{firstUpcomingPrayer > 0 ? prayers[firstUpcomingPrayer].name : data.prayers?.fajr}</td>
             </tr>
             <tr>
-              <td className="after:content-[':'] after:mx-1 capitalize">{data?.line}</td>
+              <td className="after:content-[':'] after:mx-1 capitalize">{data.praying?.line}</td>
               <td>
                 {geolocation.latitude.toFixed(4)}
                 {', '}
@@ -85,7 +77,7 @@ export default function PrayersInfo({ prayers, firstUpcomingPrayer, geolocation,
               </td>
             </tr>
             <tr>
-              <td className="after:content-[':'] after:mx-1 capitalize">{data?.timezone}</td>
+              <td className="after:content-[':'] after:mx-1 capitalize">{data.praying?.timezone}</td>
               <td>{geolocation.timezone}</td>
             </tr>
           </tbody>

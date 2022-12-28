@@ -1,8 +1,12 @@
-import type { PrayerCalenderProps, TimezoneProps } from 'lib/type';
+import { lang } from 'lib';
+import type { PrayerCalenderProps } from 'lib/type';
 import { Suspense } from 'react';
 import { convertToSeconds, secondsToHm } from 'utils';
 
-export default function PrayerCalender({ prayers, calender, locale, date }: PrayerCalenderProps) {
+export default function PrayerCalender({ calender, locale, date }: PrayerCalenderProps) {
+  const language = lang();
+  const prayersNames = language?.prayers || {};
+
   return (
     <table className="font-medium w-[350%] sm:w-[250%] md:w-[200%] lg:w-full">
       <thead>
@@ -10,8 +14,8 @@ export default function PrayerCalender({ prayers, calender, locale, date }: Pray
           <th className="text-start whitespace-nowrap">
             <Suspense fallback={null}>{date.toLocaleString(locale, { month: 'long', year: 'numeric' })}</Suspense>
           </th>
-          {prayers.map((prayer: any) => {
-            return <th key={prayer.en}>{locale === 'en' ? prayer.en : prayer.ar}</th>;
+          {Object.keys(prayersNames).map((prayer) => {
+            return <th key={prayersNames[prayer]}>{prayersNames[prayer]}</th>;
           })}
         </tr>
       </thead>
@@ -48,8 +52,8 @@ export default function PrayerCalender({ prayers, calender, locale, date }: Pray
                   const secondsOfThePrayers = convertToSeconds(item.timings[pr].substring(0, 5));
                   const shortHour = secondsToHm(secondsOfThePrayers);
 
-                  return prayers.map((prayer) => {
-                    if (prayer.en === pr)
+                  return Object.keys(prayersNames).map((prayer) => {
+                    if (prayer.toLocaleLowerCase() === pr.toLocaleLowerCase())
                       return (
                         <td key={pr} className="text-center" dir="ltr">
                           {shortHour}

@@ -22,6 +22,7 @@ export default function Home({
   const { locale } = useRouter();
   const timezone = timezoneData.data;
   const [randomNumber, setRandomNumber] = useState<number>(6);
+  const prayersNames = language.prayers;
 
   useEffect(() => {
     if (
@@ -42,43 +43,37 @@ export default function Home({
       prayerHour: timezone.timings['Fajr'],
       style: 'bg-[#2e689f] text-white',
       icon: <Fajr />,
-      ar: 'الفجر',
-      en: 'Fajr'
+      name: prayersNames?.fajr
     },
     {
       prayerHour: timezone.timings['Sunrise'],
       style: 'bg-[#fedfb1] text-black',
       icon: <Sunrise />,
-      ar: 'الشروق',
-      en: 'Sunrise'
+      name: prayersNames?.sunrise
     },
     {
       prayerHour: timezone.timings['Dhuhr'],
       style: 'bg-[#FFCC33] text-black',
       icon: <Dhuhr />,
-      ar: 'الظهر',
-      en: 'Dhuhr'
+      name: prayersNames?.dhuhr
     },
     {
       prayerHour: timezone.timings['Asr'],
       style: 'bg-[#f5ad43] text-black',
       icon: <Asr />,
-      ar: 'العصر',
-      en: 'Asr'
+      name: prayersNames?.asr
     },
     {
       prayerHour: timezone.timings['Maghrib'],
       style: 'bg-[#fad6a5] text-black',
       icon: <Maghrib />,
-      ar: 'المغرب',
-      en: 'Maghrib'
+      name: prayersNames?.maghrib
     },
     {
       prayerHour: timezone.timings['Isha'],
       style: 'bg-[#16165F] text-white',
       icon: <Isha />,
-      ar: 'العشاء',
-      en: 'Isha'
+      name: prayersNames?.isha
     }
   ];
 
