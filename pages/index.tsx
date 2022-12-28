@@ -7,7 +7,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { getRandom, convertToLink } from 'utils';
 import { loadGeolocation } from 'lib/load-geolocation';
 import type { InferGetServerSidePropsType } from 'next';
-import { PrayerView, PrayerCalender } from 'components/prayer';
+import { PrayerView, PrayerCalendar } from 'components/prayer';
 import { Sunrise, Dhuhr, Maghrib, Fajr, Isha, Asr } from 'components/icons';
 
 export default function Home({
@@ -95,7 +95,7 @@ export default function Home({
         </article>
         <article>
           <div className="w-full space-y-10 overflow-auto">
-            <PrayerCalender calender={calendar} prayers={prayers} locale={locale} date={date} />
+            <PrayerCalendar calendar={calendar} prayers={prayers} locale={locale} date={date} />
           </div>
         </article>
         <article>

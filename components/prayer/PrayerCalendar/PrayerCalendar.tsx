@@ -1,9 +1,9 @@
 import { lang } from 'lib';
-import type { PrayerCalenderProps } from 'lib/type';
+import type { PrayerCalendarProps } from 'lib/type';
 import { Suspense } from 'react';
 import { convertToSeconds, secondsToHm } from 'utils';
 
-export default function PrayerCalender({ calender, locale, date }: PrayerCalenderProps) {
+export default function PrayerCalendar({ calendar, locale, date }: PrayerCalendarProps) {
   const language = lang();
   const prayersNames = language?.prayers || {};
 
@@ -20,7 +20,7 @@ export default function PrayerCalender({ calender, locale, date }: PrayerCalende
         </tr>
       </thead>
       <tbody>
-        {calender.data
+        {calendar.data
           .slice(
             Number(
               date.toLocaleString('en', {

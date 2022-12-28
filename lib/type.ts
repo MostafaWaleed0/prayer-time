@@ -98,9 +98,9 @@ export type PrayersInfoProps = {
   date: Date;
 };
 
-export type PrayerCalenderProps = {
+export type PrayerCalendarProps = {
   prayers: Array<PrayersProps>;
   locale?: string;
-  calender: { data: Array<TimezoneProps> };
+  calendar: { data: Array<TimezoneProps> };
   date: Date;
 };
