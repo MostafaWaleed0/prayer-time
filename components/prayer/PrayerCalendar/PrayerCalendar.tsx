@@ -26,7 +26,7 @@ export default function PrayerCalendar({ calendar, locale, date }: PrayerCalenda
               date.toLocaleString('en', {
                 day: '2-digit'
               })
-            ) - 2,
+            ) - 1,
             Number(
               date.toLocaleString('en', {
                 day: '2-digit'
