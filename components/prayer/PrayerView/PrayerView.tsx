@@ -45,7 +45,7 @@ export default function PrayerItem({ prayers, geolocation, date, currentTime, lo
                   </div>
                   <time dateTime={prayerHour}>{secondsToHm(secondsOfTheUpcomingPrayer)}</time>
                 </div>
-                {arrayOfUpcomingPrayers[arrayOfUpcomingPrayers.indexOf(true) === i ? firstUpcomingPrayer : 0] ? (
+                {arrayOfUpcomingPrayers[arrayOfUpcomingPrayers.indexOf(true) === i ? firstUpcomingPrayer : undefined!] ? (
                   <div className={styleOfUpcomingPrayer}>
                     <Suspense fallback={null}>
                       {secondsToHms(arrayOfRemainingTimeForUpcomingPrayer[firstUpcomingPrayer])}
