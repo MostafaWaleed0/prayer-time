@@ -7,7 +7,7 @@ export const CurrentTime = () => {
     return date;
   });
 
-  let timer: any;
+  let timer: NodeJS.Timer;
   useEffect(() => {
     timer = setInterval(() => {
       setCurrentTime(() => {
@@ -16,7 +16,7 @@ export const CurrentTime = () => {
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [timer]);
+  }, []);
 
   return currentTime;
 };

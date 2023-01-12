@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function Container(props: { [x: string]: any; children: React.ReactNode }) {
+export default function Container(props: { [x: string]: string | React.ReactNode; children: React.ReactNode }) {
   const router = useRouter();
   const { children, ...customMeta } = props;
   const { locale } = useRouter();
