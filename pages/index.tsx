@@ -6,7 +6,7 @@ import { CurrentTime } from 'lib/current-time';
 import { Suspense, useEffect, useState } from 'react';
 import { getRandom, convertToLink } from 'utils';
 import { loadGeolocation } from 'lib/load-geolocation';
-import type { InferGetServerSidePropsType } from 'next';
+import type { InferGetServerSidePropsType, NextApiRequest } from 'next';
 import { PrayerView, PrayerCalendar } from 'components/prayer';
 import { Sunrise, Dhuhr, Maghrib, Fajr, Isha, Asr } from 'components/icons';
 
@@ -131,7 +131,7 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req }: { req: NextApiRequest }) {
   const forwarded = req.headers['x-forwarded-for'];
   const ip = typeof forwarded === 'string' ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
 
