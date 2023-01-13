@@ -48,7 +48,8 @@ export default function PrayersInfo({ prayers, firstUpcomingPrayer, geolocation,
                   {new Intl.DateTimeFormat(locale, {
                     day: '2-digit',
                     month: 'long',
-                    year: 'numeric'
+                    year: 'numeric',
+                    timeZone: geolocation.timezone
                   }).format(date)}
                 </Suspense>
               </td>
