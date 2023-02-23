@@ -10,29 +10,41 @@ export async function loadGeolocation(req: IncomingMessage) {
   try {
     const response = await axios.get(`https://ipapi.co/${ip}/json`);
     return response.data;
-  } catch (error) {
-    throw new Error(error);
+  } catch {
+    throw new Error('Error fetching geolocation');
   }
 }
 
 export async function getTimingsByCity(geolocation: GeolocationProps) {
-  const res = await fetch(
-    `https://api.aladhan.com/v1/timingsByCity?city=${convertToLink(geolocation.city, geolocation.country_name)}`
-  );
+  try {
+    const res = await fetch(
+      `https://api.aladhan.com/v1/timingsByCity?city=${convertToLink(geolocation.city, geolocation.country_name)}`
+    );
 
-  return res.json();
+    return res.json();
+  } catch {
+    throw new Error('Error fetching timings');
+  }
 }
 
 export async function getCalendarByCity(geolocation: GeolocationProps) {
-  const res = await fetch(
-    `http://api.aladhan.com/v1/calendarByCity?city=${convertToLink(geolocation.city, geolocation.country_name)}`
-  );
+  try {
+    const res = await fetch(
+      `http://api.aladhan.com/v1/calendarByCity?city=${convertToLink(geolocation.city, geolocation.country_name)}`
+    );
 
-  return res.json();
+    return res.json();
+  } catch {
+    throw new Error('Error fetching calendar');
+  }
 }
 
 export async function getHadiths() {
-  const res = await fetch(`https://hadithapi.com/api/hadiths/?apiKey=$2y$10$${process.env.IP_HADITHS}`);
+  try {
+    const res = await fetch(`https://hadithapi.com/api/hadiths/?apiKey=$2y$10$${process.env.IP_HADITHS}`);
 
-  return res.json();
+    return res.json();
+  } catch {
+    throw new Error('Error fetching hadiths');
+  }
 }
