@@ -1,14 +1,14 @@
-import Image from 'next/image';
-import { lang } from 'lib';
-import { useRouter } from 'next/router';
 import { Container } from 'components/common';
+import { Asr, Dhuhr, Fajr, Isha, Maghrib, Sunrise } from 'components/icons';
+import { PrayerCalendar, PrayerView } from 'components/prayer';
+import { getCalendarByCity, getHadiths, getTimingsByCity, lang, loadGeolocation } from 'lib';
 import { CurrentTime } from 'lib/current-time';
+import { GeolocationProps } from 'lib/type';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Suspense, useEffect, useState } from 'react';
-import { getRandom, convertToLink } from 'utils';
-import { loadGeolocation } from 'lib/load-geolocation';
-import type { InferGetServerSidePropsType, NextApiRequest } from 'next';
-import { PrayerView, PrayerCalendar } from 'components/prayer';
-import { Sunrise, Dhuhr, Maghrib, Fajr, Isha, Asr } from 'components/icons';
+import { getRandom } from 'utils';
 
 export default function Home({
   timezoneData,
@@ -131,38 +131,29 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps({ req }: { req: NextApiRequest }) {
-  const forwarded = req.headers['x-forwarded-for'];
-  const ip = typeof forwarded === 'string' ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  try {
+    const geolocation: GeolocationProps = await loadGeolocation(req);
 
-  const geolocation = await loadGeolocation(ip);
+    const [timingsByCity, calendarByCity, bukhariData] = await Promise.all([
+      getTimingsByCity(geolocation),
+      getCalendarByCity(geolocation),
+      getHadiths()
+    ]);
 
-  const timezone = await fetch(
-    `https://api.aladhan.com/v1/timingsByCity?city=${convertToLink(geolocation.city, geolocation.country_name)}`
-  );
-
-  const calendarByCity = await fetch(
-    `http://api.aladhan.com/v1/calendarByCity?city=${convertToLink(geolocation.city, geolocation.country_name)}`
-  );
-
-  const bukhari = await fetch(`https://hadithapi.com/api/hadiths/?apiKey=$2y$10$${process.env.IP_HADITHS}`);
-
-  const bukhariData = await bukhari.json();
-  const timezoneData = await timezone.json();
-  const calendarByCityData = await calendarByCity.json();
-
-  if (!geolocation) {
     return {
-      notFound: true,
-    }
-  }
+      props: {
+        timezoneData: timingsByCity,
+        geolocation,
+        bukhariData,
+        calendar: calendarByCity
+      }
+    };
+  } catch (error) {
+    console.error('Error fetching data:', error);
 
-  return {
-    props: {
-      timezoneData,
-      geolocation,
-      bukhariData,
-      calendar: calendarByCityData
-    }
-  };
-}
+    return {
+      notFound: true
+    };
+  }
+};
