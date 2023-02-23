@@ -141,6 +141,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       getHadiths()
     ]);
 
+    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+
     return {
       props: {
         timezoneData: timingsByCity,
