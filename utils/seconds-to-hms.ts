@@ -1,9 +1,8 @@
 export const secondsToHms = (d: number) => {
   d = Number(d);
-  const h = Math.floor(d / 3600);
-  const m = Math.floor((d % 3600) / 60);
-  const s = Math.floor((d % 3600) % 60);
+  const hour = Math.floor(d / 3600);
+  const minute = Math.floor((d % 3600) / 60);
+  const second = Math.floor((d % 3600) % 60);
 
-  const dateDisplay = `${h < 10 ? `0${h}` : h}:${m < 10 ? `0${m}` : m}:${s < 10 ? `0${s}` : s}`;
-  return dateDisplay;
+  return `${hour < 10 ? `0${hour}` : hour}:${minute < 10 ? `0${minute}` : minute}:${second < 10 ? `0${second}` : second}`;
 };
