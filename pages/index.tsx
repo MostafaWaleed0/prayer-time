@@ -21,22 +21,18 @@ export default function Home({
   const home = language.home;
   const { locale } = useRouter();
   const timezone = timezoneData.data;
-  const [randomNumber, setRandomNumber] = useState<number>(6);
+  const [randomNumber, setRandomNumber] = useState<number>(3);
   const prayersNames = language.prayers;
+  const hadiths = bukhariData.hadiths.data[randomNumber];
 
   useEffect(() => {
-    if (
-      bukhariData.hadiths.data[randomNumber].hadithArabic.length &&
-      bukhariData.hadiths.data[randomNumber].hadithEnglish.length > 600
-    ) {
-      return setRandomNumber(randomNumber + 1);
-    }
-    setInterval(() => {
-      setRandomNumber(getRandom(0, 200));
+    const intervalId = setInterval(() => {
+      let newRandomNumber = getRandom(0, 25);
+      setRandomNumber(newRandomNumber);
     }, 1000 * 60 * 60 * 24);
-  }, [bukhariData.hadiths.data, randomNumber]);
 
-  const hadiths = bukhariData.hadiths.data[randomNumber];
+    return () => clearInterval(intervalId);
+  }, []);
 
   const prayers = [
     {
