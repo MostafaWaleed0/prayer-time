@@ -1,5 +1,5 @@
 import { Container } from 'components/common';
-import { Asr, Dhuhr, Fajr, Isha, Maghrib, Sunrise } from 'components/icons';
+import { Asr, Dhuhr, Fajr, Isha, Maghrib, Sunrise, Random } from 'components/icons';
 import { PrayerCalendar, PrayerView } from 'components/prayer';
 import { getCalendarByCity, getHadiths, getTimingsByCity, lang, loadGeolocation } from 'lib';
 import { CurrentTime } from 'lib/current-time';
@@ -7,7 +7,7 @@ import { GeolocationProps } from 'lib/type';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useState } from 'react';
 import { getRandom } from 'utils';
 
 export default function Home({
@@ -25,14 +25,10 @@ export default function Home({
   const prayersNames = language.prayers;
   const hadiths = bukhariData.hadiths.data[randomNumber];
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      let newRandomNumber = getRandom(0, 25);
-      setRandomNumber(newRandomNumber);
-    }, 1000 * 60 * 60 * 24);
-
-    return () => clearInterval(intervalId);
-  }, []);
+  const generateRandomNumber = () => {
+    const newRandomNumber = getRandom(0, 24);
+    setRandomNumber(newRandomNumber);
+  };
 
   const prayers = [
     {
@@ -94,7 +90,13 @@ export default function Home({
             <PrayerCalendar calendar={calendar} prayers={prayers} locale={locale} date={date} />
           </div>
         </article>
-        <article>
+        <article className="relative">
+          <button
+            onClick={generateRandomNumber}
+            className="absolute border-2 border-yellow-400 border-b-0 -top-[51px] left-[5%] bg-green-800 p-3 rounded-t-lg"
+          >
+            <Random className="fill-yellow-400" />
+          </button>
           <div className="w-full space-y-10">
             <h2>{home?.hadith.heading}</h2>
             <p className="flex">
