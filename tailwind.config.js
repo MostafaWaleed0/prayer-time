@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./pages/**/*.tsx', './components/**/*.tsx', './layouts/**/*.tsx'],
+  content: ['./app/[lang]/**/*.{ts,tsx}', './app/[lang]/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -10,23 +10,14 @@ module.exports = {
         green: {
           700: '#185D4E',
           800: '#0E5344'
-        }
-      },
-
-      container: {
-        center: true
+        },
+        fajr: '#2e689f',
+        sunrise: '#fedfb1',
+        dhuhr: '#FFCC33',
+        asr: '#f5ad43',
+        maghrib: '#fad6a5',
+        isha: '#16165F'
       }
     }
-  },
-  plugins: [
-    function ({ addComponents }) {
-      addComponents({
-        '.container': {
-          maxWidth: 'min(100% - 2rem, 70rem)'
-        }
-      });
-    },
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp')
-  ]
+  }
 };
