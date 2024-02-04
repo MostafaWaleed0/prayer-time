@@ -10,13 +10,7 @@ module.exports = {
         green: {
           700: '#185D4E',
           800: '#0E5344'
-        },
-        fajr: '#2e689f',
-        sunrise: '#fedfb1',
-        dhuhr: '#FFCC33',
-        asr: '#f5ad43',
-        maghrib: '#fad6a5',
-        isha: '#16165F'
+        }
       }
     }
   }
