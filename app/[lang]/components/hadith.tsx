@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import Praise from '../../../public/Praise.png';
+import Praise from '@/public/Praise.png';
 import type { HadithProps } from '../lib/type';
 import { getRandom } from '../utils';
 import { Random } from './icons';

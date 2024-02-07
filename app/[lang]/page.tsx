@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-import { getDictionary } from '../../get-dictionary';
-import { Locale } from '../../i18n-config';
+import { getDictionary } from '@/get-dictionary';
+import { Locale } from '@/i18n-config';
 import { getCalendarByCity, getHadiths, getTimingsByCity, loadGeolocation } from './actions';
 import Hadith from './components/hadith';
 import PrayerView from './components/prayer-view';
@@ -71,27 +71,26 @@ function PrayerCalendar({ calendar, locale, prayersNames }: PrayerCalendarProps)
   );
 }
 
-async function fetchData(geolocation: GeolocationProps) {
-  try {
-    const [prayerData, calendar, hadiths] = await Promise.all([
-      getTimingsByCity(geolocation),
-      getCalendarByCity(geolocation),
-      getHadiths()
-    ]);
-
-    return { prayerData, calendar, hadiths };
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    throw error;
-  }
-}
-
 export default async function Page({ params: { lang } }: { params: { lang: Locale } }) {
-  const dict = await getDictionary(lang);
-  const geolocation = await loadGeolocation();
+  async function fetchData(geolocation: GeolocationProps) {
+    try {
+      let [prayerData, calendar, hadiths] = await Promise.all([
+        getTimingsByCity(geolocation),
+        getCalendarByCity(geolocation),
+        getHadiths()
+      ]);
+
+      return { prayerData, calendar, hadiths };
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error;
+    }
+  }
+  let dict = await getDictionary(lang);
+  let geolocation = await loadGeolocation();
   const LocaleSwitcher = lang === 'en' ? 'ar' : 'en';
-  const { prayerData, calendar, hadiths } = await fetchData(geolocation);
-  const prayers = mapPrayers(prayerData.data, dict?.prayers);
+  let { prayerData, calendar, hadiths } = await fetchData(geolocation);
+  let prayers = mapPrayers(prayerData.data, dict?.prayers);
 
   if (!geolocation) {
     notFound();
@@ -99,21 +98,27 @@ export default async function Page({ params: { lang } }: { params: { lang: Local
 
   return (
     <>
-      <section className="relative">
+      <section className="relative border-2 border-yellow-400 flex flex-col-reverse md:flex-row gap-7 justify-between items-center w-full bg-green-800 text-white py-20 px-8 md:px-14 rounded-3xl h-full">
         <Link
           type="button"
           href={LocaleSwitcher}
-          className="absolute border-2 border-yellow-400 uppercase w-12 border-b-0 -top-[50px] left-[5%] bg-green-800 p-3 rounded-t-lg"
+          className="absolute border-2 text-yellow-400 border-yellow-400 uppercase w-12 border-b-0 -top-[50px] left-[5%] bg-green-800 p-3 rounded-t-lg"
         >
           {LocaleSwitcher}
         </Link>
-        <PrayerView prayers={prayers} locale={lang} geolocation={geolocation} dict={dict} />
+        <Suspense>
+          <PrayerView prayers={prayers} locale={lang} geolocation={geolocation} dict={dict} />
+        </Suspense>
       </section>
-      <section>
-        <PrayerCalendar calendar={calendar} prayersNames={dict?.prayers} locale={lang} />
+      <section className="border-2 border-yellow-400 flex flex-col-reverse md:flex-row gap-7 justify-between items-center w-full bg-green-800 text-white py-20 px-8 md:px-14 rounded-3xl h-full">
+        <Suspense>
+          <PrayerCalendar calendar={calendar} prayersNames={dict?.prayers} locale={lang} />
+        </Suspense>
       </section>
-      <article className="relative">
-        <Hadith hadiths={hadiths} locale={lang} dict={dict?.home} />
+      <article className="relative border-2 border-yellow-400 flex flex-col-reverse md:flex-row gap-7 justify-between items-center w-full bg-green-800 text-white py-20 px-8 md:px-14 rounded-3xl h-full">
+        <Suspense>
+          <Hadith hadiths={hadiths} locale={lang} dict={dict?.home} />
+        </Suspense>
       </article>
     </>
   );
