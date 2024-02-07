@@ -7,9 +7,8 @@ import { getRandom } from './utils';
 import { convertToLink } from './utils/convert-to-link';
 
 export async function loadGeolocation() {
-  let FALLBACK_IP_ADDRESS = '0.0.0.0';
   let forwardedFor = headers().get('x-forwarded-for');
-  let ip = forwardedFor ? forwardedFor.split(',')[0] ?? FALLBACK_IP_ADDRESS : headers().get('x-real-ip') ?? FALLBACK_IP_ADDRESS;
+  let ip = typeof forwardedFor === 'string' ? forwardedFor.split(/, /)[0] : headers().get('x-real-ip');
 
   try {
     let res = await fetch(`https://ipapi.co/${ip}/json`, { next: { revalidate: 3600 } });
