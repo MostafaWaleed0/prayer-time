@@ -7,7 +7,7 @@ import { convertToSeconds, secondsToHm, secondsToHms } from '../utils';
 import type { PrayerViewProps } from '../lib/type';
 
 export default function PrayerView({ prayers, geolocation, dict, locale }: PrayerViewProps) {
-  let firstUpcomingPrayer: number = 0;
+  let firstUpcomingPrayer = 0;
   const currentTime = useCurrentTime();
   const arrayOfUpcomingPrayers: boolean[] = [];
   const arrayOfRemainingTimeForUpcomingPrayer: number[] = [];
