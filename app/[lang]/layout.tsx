@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Prayer Time'
 };
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
