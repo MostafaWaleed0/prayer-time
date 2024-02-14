@@ -3,7 +3,6 @@
 import { unstable_cache as cache } from 'next/cache';
 import { headers } from 'next/headers';
 import { GeolocationProps } from './lib/type';
-import { convertToLink } from './utils/convert-to-link';
 
 export async function loadGeolocation() {
   let forwardedFor = headers().get('x-forwarded-for');
@@ -22,7 +21,9 @@ export const getTimingsByCity = cache(
   async (geolocation: GeolocationProps) => {
     try {
       let res = await fetch(
-        `https://api.aladhan.com/v1/timingsByCity?city=${convertToLink(geolocation.city, geolocation.country_name)}`
+        `https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(geolocation.city)}&country=${encodeURIComponent(
+          geolocation.country_name
+        )}`
       );
 
       return res.json();
@@ -40,7 +41,9 @@ export const getCalendarByCity = cache(
   async (geolocation: GeolocationProps) => {
     try {
       let res = await fetch(
-        `http://api.aladhan.com/v1/calendarByCity?city=${convertToLink(geolocation.city, geolocation.country_name)}`
+        `http://api.aladhan.com/v1/calendarByCity?city=${encodeURIComponent(geolocation.city)}&country=${encodeURIComponent(
+          geolocation.country_name
+        )}`
       );
 
       return res.json();
