@@ -1,31 +1,6 @@
 import { Asr, Dhuhr, Fajr, Isha, Maghrib, Sunrise } from '../components/icons';
 import { PrayerInfo } from './type';
 
-function capitalize(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function getPrayerStyle(prayerName: string): string {
-  return `${prayersColors[prayerName]} text-${prayersTextColors[prayerName]}`;
-}
-
-interface PrayerData {
-  timings: Record<string, string>;
-}
-
-export function mapPrayers(prayerData: PrayerData, prayersNames?: Record<string, string>): PrayerInfo[] {
-  const prayerNamesOrder = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
-
-  return prayerNamesOrder.map((prayerName) => {
-    const prayerHour = prayerData.timings[capitalize(prayerName)];
-    const style = getPrayerStyle(prayerName);
-    const icon = prayerIcons[prayerName];
-    const name = prayersNames?.[prayerName];
-
-    return { prayerHour, style, icon, name };
-  });
-}
-
 const prayersTextColors: Record<string, string> = {
   fajr: 'white',
   sunrise: 'black',
@@ -52,3 +27,28 @@ const prayerIcons: Record<string, JSX.Element> = {
   maghrib: <Maghrib />,
   isha: <Isha />
 };
+
+function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function getPrayerStyle(prayerName: string): string {
+  return `${prayersColors[prayerName]} text-${prayersTextColors[prayerName]}`;
+}
+
+interface PrayerData {
+  timings: Record<string, string>;
+}
+
+export function mapPrayers(prayerData: PrayerData, prayersNames?: Record<string, string>): PrayerInfo[] {
+  const prayerNamesOrder = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
+
+  return prayerNamesOrder.map((prayerName) => {
+    const prayerHour = prayerData.timings[capitalize(prayerName)];
+    const style = getPrayerStyle(prayerName);
+    const icon = prayerIcons[prayerName];
+    const name = prayersNames?.[prayerName];
+
+    return { prayerHour, style, icon, name };
+  });
+}
