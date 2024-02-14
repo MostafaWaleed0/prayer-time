@@ -27,7 +27,7 @@ export default function RootLayout({ children, params }: { children: React.React
           alt={''}
           aria-hidden={true}
         />
-        <main className="max-w-[70rem] px-2 py-24 space-y-32 m-auto" tabIndex={-1}>
+        <main className="w-full max-w-[70rem] px-2 py-24 space-y-32 m-auto" tabIndex={-1}>
           {children}
         </main>
       </body>
