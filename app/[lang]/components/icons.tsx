@@ -1,14 +1,6 @@
 export function Asr({ ...props }) {
   return (
-    <svg
-      width={42}
-      height={42}
-      viewBox="0 0 36 36"
-      aria-hidden={true}
-      focusable={false}
-      preserveAspectRatio="xMidYMid meet"
-      {...props}
-    >
+    <svg width={42} height={42} viewBox="0 0 36 36" aria-hidden focusable={false} preserveAspectRatio="xMidYMid meet" {...props}>
       <path
         fill="#F4900C"
         d="M32.114 16.736c1.587-.451 1.587-1.147.001-1.599l-.559-.154L31 14.82v.005l-2.94-.891L30.383 12h-.014l.493-.322l.497-.359c1.291-1.023 1.008-1.686-.629-1.498l-.636.089l-.632.09h-.002l-2.979.339l1.77-3.18l.309-.558c.802-1.44.281-1.963-1.158-1.163l-.558.282l-.556.28h-.002L23.66 7.489L24 4.542v-.003l.08-.632l.077-.638c.188-1.634-.492-1.915-1.516-.623l-.394.499l-2.257 2.851l-.819-2.881l-.002-.005l-.348-1.225c-.451-1.587-1.19-1.587-1.642 0l-.174.612l-.174.613l-.821 2.886l-1.861-2.35l-.001-.001l-.395-.499l-.397-.501c-1.023-1.29-1.704-1.007-1.515.629l.074.634l.073.632v.001l.346 2.979l-3.177-1.77l-.557-.311c-1.441-.802-1.963-.28-1.161 1.161l.31.556l1.77 3.177l-2.979-.346h-.001l-.632-.073l-.635-.074c-1.636-.189-1.918.492-.629 1.515l.501.397l.499.395l.001.001l2.35 1.861l-2.884.822l-.612.174l-.612.174c-1.587.452-1.587 1.19 0 1.642l1.225.348l.004.002l2.881.819l-2.851 2.258l-.499.396c-1.292 1.023-1.011 1.705.623 1.517l.638-.08l.632-.081h.002l2.948-.34L8 24.286v.002l-.28.556l-.296.559c-.8 1.44-.271 1.96 1.169 1.158l.56-.309l3.185-1.77L12 27.46v.002l-.08.632l-.077.635c-.189 1.637.491 1.918 1.514.627l.396-.5l.395-.5l1.862-2.352l.82 2.885v.001l.174.612l.175.613c.452 1.586 1.105 1.586 1.557-.001L19 28.89v-.004l.905-2.882l1.905 2.352l.416.5l.407.5c1.022 1.29 1.71 1.01 1.521-.625l-.078-.637l-.076-.633v-.003l-.34-2.947L26.284 26h.002l.557.28l.558.295c1.44.803 1.963.273 1.16-1.167l-.28-.56L28 24.29v-.002l-1.489-2.628l2.947.34h.003l.633.08l.637.077c1.635.188 1.915-.492.625-1.515l-.5-.395l-.5-.395l-2.352-1.947L30.886 17h.004l1.224-.264z"
@@ -38,7 +30,7 @@ export function Dhuhr({ ...props }) {
       xmlSpace="preserve"
       width={42}
       height={42}
-      aria-hidden={true}
+      aria-hidden
       focusable={false}
       {...props}
     >
@@ -123,7 +115,7 @@ export function Fajr({ ...props }) {
       xmlSpace="preserve"
       width={42}
       height={42}
-      aria-hidden={true}
+      aria-hidden
       focusable={false}
       {...props}
     >
@@ -184,7 +176,7 @@ export function Isha({ ...props }) {
       xmlSpace="preserve"
       width={42}
       height={42}
-      aria-hidden={true}
+      aria-hidden
       focusable={false}
       {...props}
     >
@@ -211,7 +203,7 @@ export function Isha({ ...props }) {
 
 export function List({ ...props }) {
   return (
-    <svg width={24} height={24} fill="currentColor" viewBox="0 0 16 16" aria-hidden={true} focusable={false} {...props}>
+    <svg width={24} height={24} fill="currentColor" viewBox="0 0 16 16" aria-hidden focusable={false} {...props}>
       <path
         fillRule="evenodd"
         d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
@@ -231,7 +223,7 @@ export function Maghrib({ ...props }) {
       xmlSpace="preserve"
       width={42}
       height={42}
-      aria-hidden={true}
+      aria-hidden
       focusable={false}
       {...props}
     >
@@ -259,7 +251,7 @@ export function Maghrib({ ...props }) {
 
 export function Random({ ...props }) {
   return (
-    <svg height={25} width={25} viewBox="0 0 1792 1792" aria-hidden={true} focusable={false} {...props}>
+    <svg height={25} width={25} viewBox="0 0 1792 1792" aria-hidden focusable={false} {...props}>
       <path d="M666 481q-60 92-137 273-22-45-37-72.5t-40.5-63.5-51-56.5-63-35-81.5-14.5h-224q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h224q250 0 410 225zm1126 799q0 14-9 23l-320 320q-9 9-23 9-13 0-22.5-9.5t-9.5-22.5v-192q-32 0-85 .5t-81 1-73-1-71-5-64-10.5-63-18.5-58-28.5-59-40-55-53.5-56-69.5q59-93 136-273 22 45 37 72.5t40.5 63.5 51 56.5 63 35 81.5 14.5h256v-192q0-14 9-23t23-9q12 0 24 10l319 319q9 9 9 23zm0-896q0 14-9 23l-320 320q-9 9-23 9-13 0-22.5-9.5t-9.5-22.5v-192h-256q-48 0-87 15t-69 45-51 61.5-45 77.5q-32 62-78 171-29 66-49.5 111t-54 105-64 100-74 83-90 68.5-106.5 42-128 16.5h-224q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h224q48 0 87-15t69-45 51-61.5 45-77.5q32-62 78-171 29-66 49.5-111t54-105 64-100 74-83 90-68.5 106.5-42 128-16.5h256v-192q0-14 9-23t23-9q12 0 24 10l319 319q9 9 9 23z" />
     </svg>
   );
@@ -276,7 +268,7 @@ export function Sunrise({ ...props }) {
       xmlSpace="preserve"
       width={42}
       height={42}
-      aria-hidden={true}
+      aria-hidden
       focusable={false}
       {...props}
     >
