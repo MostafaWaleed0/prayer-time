@@ -1,10 +1,9 @@
+import { getDictionary } from '@/get-dictionary';
+import { Locale } from '@/i18n-config';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-import { getDictionary } from '@/get-dictionary';
-import { Locale } from '@/i18n-config';
-import { getCalendarByCity, getHadiths, getTimingsByCity, loadGeolocation } from './actions';
-import Hadith from './components/hadith';
+import { getCalendarByCity, getTimingsByCity, loadGeolocation } from './actions';
 import PrayerView from './components/prayer-view';
 import { mapPrayers } from './lib/prayers';
 import type { GeolocationProps, PrayerCalendarProps } from './lib/type';
@@ -74,22 +73,18 @@ function PrayerCalendar({ calendar, locale, prayersNames }: PrayerCalendarProps)
 export default async function Page({ params: { lang } }: { params: { lang: Locale } }) {
   async function fetchData(geolocation: GeolocationProps) {
     try {
-      let [prayerData, calendar, hadiths] = await Promise.all([
-        getTimingsByCity(geolocation),
-        getCalendarByCity(geolocation),
-        getHadiths()
-      ]);
+      let [prayerData, calendar] = await Promise.all([getTimingsByCity(geolocation), getCalendarByCity(geolocation)]);
 
-      return { prayerData, calendar, hadiths };
+      return { prayerData, calendar };
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching datsa:', error);
       throw error;
     }
   }
   let dict = await getDictionary(lang);
   let geolocation = await loadGeolocation();
   const LocaleSwitcher = lang === 'en' ? 'ar' : 'en';
-  let { prayerData, calendar, hadiths } = await fetchData(geolocation);
+  let { prayerData, calendar } = await fetchData(geolocation);
   let prayers = mapPrayers(prayerData.data, dict?.prayers);
 
   if (!geolocation) {
@@ -115,11 +110,6 @@ export default async function Page({ params: { lang } }: { params: { lang: Local
           <PrayerCalendar calendar={calendar} prayersNames={dict?.prayers} locale={lang} />
         </Suspense>
       </section>
-      <article className="relative border-2 border-yellow-400 flex flex-col-reverse md:flex-row gap-7 justify-between items-center w-full bg-green-800 text-white py-20 px-8 md:px-14 rounded-3xl h-full">
-        <Suspense>
-          <Hadith hadiths={hadiths} locale={lang} dict={dict?.home} />
-        </Suspense>
-      </article>
     </>
   );
 }

@@ -91,9 +91,3 @@ export type PrayerCalendarProps = {
   locale: string;
   calendar: { data: Array<TimezoneProps> };
 };
-
-export type HadithProps = {
-  dict: any;
-  locale: string;
-  hadiths: { hadiths: any };
-};

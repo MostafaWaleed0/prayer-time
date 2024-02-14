@@ -22,12 +22,5 @@
     "upcomingPrayer": "Upcoming Prayer",
     "timezone": "Timezone",
     "line": "Latitude, Longitude"
-  },
-  "home": {
-    "hadith": {
-      "heading": "Hadiths of Sahih Al-Bukhari",
-      "source": "Reference",
-      "hadith": "Hadith"
-    }
   }
 }

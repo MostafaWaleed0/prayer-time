@@ -3,7 +3,6 @@
 import { unstable_cache as cache } from 'next/cache';
 import { headers } from 'next/headers';
 import { GeolocationProps } from './lib/type';
-import { getRandom } from './utils';
 import { convertToLink } from './utils/convert-to-link';
 
 export async function loadGeolocation() {
@@ -54,15 +53,3 @@ export const getCalendarByCity = cache(
     revalidate: 3600
   }
 );
-
-export async function getHadiths() {
-  try {
-    let res = await fetch(
-      `https://hadithapi.com/api/hadiths/?apiKey=$2y$10$${process.env.IP_HADITHS}&paginate=50&chapter=${getRandom(1, 15)}`
-    );
-
-    return res.json();
-  } catch {
-    throw new Error('Error fetching hadiths');
-  }
-}
