@@ -77,7 +77,7 @@ export default async function Page({ params: { lang } }: { params: { lang: Local
 
       return { prayerData, calendar };
     } catch (error) {
-      console.error('Error fetching datsa:', error);
+      console.error('Error fetching data:', error);
       throw error;
     }
   }
