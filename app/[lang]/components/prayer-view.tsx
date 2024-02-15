@@ -7,8 +7,9 @@ import { convertToSeconds, secondsToHm, secondsToHms } from '../utils';
 import type { PrayerViewProps } from '../lib/type';
 
 export default function PrayerView({ prayers, geolocation, dict, locale }: PrayerViewProps) {
+  // Initialize variables to store upcoming prayer information and remaining time.
   let firstUpcomingPrayer = 0;
-  const currentTime = useCurrentTime();
+  const currentTime = useCurrentTime(); // Custom hook to get current time.
   const arrayOfUpcomingPrayers: boolean[] = [];
   const arrayOfRemainingTimeForUpcomingPrayer: number[] = [];
 
@@ -16,6 +17,7 @@ export default function PrayerView({ prayers, geolocation, dict, locale }: Praye
     <div className="grid lg:grid-cols-2 gap-20 items-center lg:gap-40 space-y-4 font-medium w-full">
       <ol role="list" className="space-y-2 order-1 lg:-order-1">
         {prayers?.map(({ name, style, icon, prayerHour }, i: number) => {
+          // Convert prayer time to seconds for calculation.
           const secondsOfTheDay = convertToSeconds('24:00:00');
           const secondsOfTheUpcomingPrayer = convertToSeconds(prayerHour);
           const secondsFromTheBeginningOfTheDayToTheCurrentMoment = convertToSeconds(
@@ -25,23 +27,29 @@ export default function PrayerView({ prayers, geolocation, dict, locale }: Praye
             })
           );
 
+          // Calculate the upcoming prayer time for Fajr prayer if it's on the next day.
           const theUpcomingPrayerOfFajrPrayer =
             secondsOfTheDay - secondsFromTheBeginningOfTheDayToTheCurrentMoment + convertToSeconds(prayers[0].prayerHour);
           const secondsOfTheLastPrayer = convertToSeconds(prayers[prayers.length - 1].prayerHour);
 
+          // Check if Fajr prayer is on the next day.
           const fajrPrayerTheNextDay = secondsOfTheLastPrayer < secondsFromTheBeginningOfTheDayToTheCurrentMoment;
           const upcomingPrayers = secondsOfTheUpcomingPrayer > secondsFromTheBeginningOfTheDayToTheCurrentMoment;
           const remainingTimeForUpcomingPrayer = secondsOfTheUpcomingPrayer - secondsFromTheBeginningOfTheDayToTheCurrentMoment;
 
+          // Push remaining time and upcoming prayer status to arrays.
           arrayOfRemainingTimeForUpcomingPrayer.push(remainingTimeForUpcomingPrayer);
           arrayOfUpcomingPrayers.push(upcomingPrayers);
 
+          // Find the index of the first upcoming prayer.
           firstUpcomingPrayer = arrayOfUpcomingPrayers.findIndex((x) => x === true);
 
+          // Determine the style for upcoming prayer countdown display.
           const styleOfUpcomingPrayer = `absolute top-2/4 hidden lg:block ${
             locale === 'en' ? 'left-[calc(100%+4rem)]' : 'right-[calc(100%-1rem)]'
           } rounded-md px-3 py-6 ${style} -translate-x-1/2 -translate-y-1/2`;
 
+          // Render each prayer item along with countdown if it's upcoming.
           return (
             <li key={name} className={`p-4 rounded-[10px] relative ${style}`}>
               <div className="flex items-center justify-between" dir="ltr">
@@ -52,11 +60,13 @@ export default function PrayerView({ prayers, geolocation, dict, locale }: Praye
                 <time dateTime={prayerHour}>{secondsToHm(secondsOfTheUpcomingPrayer)}</time>
               </div>
               {arrayOfUpcomingPrayers[arrayOfUpcomingPrayers.indexOf(true) === i ? firstUpcomingPrayer : undefined!] ? (
+                // Render countdown for upcoming prayer.
                 <div className={styleOfUpcomingPrayer}>
                   <Suspense fallback={null}>{secondsToHms(arrayOfRemainingTimeForUpcomingPrayer[firstUpcomingPrayer])}</Suspense>
                   <div></div>
                 </div>
               ) : i === 0 && fajrPrayerTheNextDay ? (
+                // Render countdown for Fajr prayer if it's on the next day.
                 <div className={styleOfUpcomingPrayer}>
                   <Suspense fallback={null}>{secondsToHms(theUpcomingPrayerOfFajrPrayer)}</Suspense>
                 </div>
