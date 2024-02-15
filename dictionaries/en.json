@@ -1,10 +1,4 @@
 {
-  "header": {
-    "prayer times": "/prayer-times",
-    "Qibla": "/qibla",
-    "moon today": "/moon-today",
-    "hijri calendar": "/hijri-calendar"
-  },
   "prayers": {
     "fajr": "Fajr",
     "sunrise": "Sunrise",

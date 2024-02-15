@@ -1,10 +1,4 @@
 {
-  "header": {
-    "مواقيت الصلاة": "/prayer-times",
-    "إتجاه القبلة": "/qibla",
-    "القمر اليوم": "/moon-today",
-    "التاريخ الهجري": "/hijri-calendar"
-  },
   "prayers": {
     "fajr": "الفجر",
     "sunrise": "الشروق",
