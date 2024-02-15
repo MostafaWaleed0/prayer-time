@@ -9,6 +9,8 @@ export async function loadGeolocation() {
   let ip = typeof forwardedFor === 'string' ? forwardedFor.split(/, /)[0] : headers().get('x-real-ip');
 
   try {
+    // IMPORTANT: When using this code locally, ensure to replace the IP address in the API URL from
+    // https://ipapi.co/${ip}/json to https://ipapi.co/json. Failure to do so will result in errors.
     let res = await fetch(`https://ipapi.co/${ip}/json`, { next: { revalidate: 3600 } });
     return res.json();
   } catch (error) {
