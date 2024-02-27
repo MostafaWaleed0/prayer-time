@@ -1,7 +1,6 @@
 import { getDictionary } from '@/get-dictionary';
 import { Locale } from '@/i18n-config';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { getCalendarByCity, getTimingsByCity, loadGeolocation } from './actions';
 import PrayerView from './components/prayer-view';
@@ -87,10 +86,6 @@ export default async function Page({ params: { lang } }: { params: { lang: Local
   let { prayerData, calendar } = await fetchData(geolocation);
   let prayers = mapPrayers(prayerData.data, dict?.prayers);
 
-  if (!geolocation) {
-    notFound();
-  }
-
   return (
     <>
       <section className="relative border-2 border-yellow-400 flex flex-col-reverse md:flex-row gap-7 justify-between items-center w-full bg-green-800 text-white py-20 px-8 md:px-14 rounded-3xl h-full">
@@ -101,15 +96,35 @@ export default async function Page({ params: { lang } }: { params: { lang: Local
         >
           {LocaleSwitcher}
         </Link>
-        <Suspense>
-          <PrayerView prayers={prayers} locale={lang} geolocation={geolocation} dict={dict} />
+        <Suspense fallback={<LoadingIndicator />}>
+          {geolocation.error ? (
+            <ErrorMessage />
+          ) : (
+            <PrayerView prayers={prayers} locale={lang} geolocation={geolocation} dict={dict} /> // Render the PrayerView component with necessary props
+          )}
         </Suspense>
       </section>
       <section className="border-2 border-yellow-400 flex flex-col-reverse md:flex-row gap-7 justify-between items-center w-full bg-green-800 text-white py-20 px-8 md:px-14 rounded-3xl h-full">
-        <Suspense>
+        <Suspense fallback={<LoadingIndicator />}>
           <PrayerCalendar calendar={calendar} prayersNames={dict?.prayers} locale={lang} />
         </Suspense>
       </section>
     </>
+  );
+}
+
+function LoadingIndicator() {
+  return (
+    <p className="w-full text-center text-5xl normal-case" dir="ltr">
+      Loading...
+    </p>
+  );
+}
+
+function ErrorMessage() {
+  return (
+    <p className="w-full text-center text-3xl normal-case text-red-600">
+      Sorry, we were unable to determine the prayer time in your country
+    </p>
   );
 }

@@ -147,9 +147,9 @@ export default function PrayerView({ prayers, geolocation, dict, locale }: Praye
               <tr>
                 <td className="after:content-[':'] after:mx-1 capitalize">{dict.praying?.line}</td>
                 <td>
-                  {geolocation.latitude.toFixed(4)}
+                  {geolocation.latitude?.toFixed(4)}
                   {', '}
-                  {geolocation.longitude.toFixed(4)}
+                  {geolocation.longitude?.toFixed(4)}
                 </td>
               </tr>
               <tr>
