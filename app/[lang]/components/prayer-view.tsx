@@ -63,7 +63,7 @@ export default function PrayerView({ prayers, geolocation, dict, locale }: Praye
                 // Render countdown for upcoming prayer.
                 <div className={styleOfUpcomingPrayer}>
                   <Suspense fallback={null}>{secondsToHms(arrayOfRemainingTimeForUpcomingPrayer[firstUpcomingPrayer])}</Suspense>
-                  <div></div>
+                  <div />
                 </div>
               ) : i === 0 && fajrPrayerTheNextDay ? (
                 // Render countdown for Fajr prayer if it's on the next day.
