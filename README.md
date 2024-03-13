@@ -4,7 +4,7 @@
 
 Make sure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (Version 18.x)
+- [Node.js](https://nodejs.org/) (Version 20.x)
 - [pnpm](https://pnpm.io/) - If not installed, run:
 
   ```bash
