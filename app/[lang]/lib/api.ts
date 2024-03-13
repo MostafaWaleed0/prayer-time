@@ -2,7 +2,7 @@
 
 import { unstable_cache as cache } from 'next/cache';
 import { headers } from 'next/headers';
-import { GeolocationProps } from './lib/type';
+import { GeolocationProps } from './type';
 
 export async function loadGeolocation() {
   let forwardedFor = headers().get('x-forwarded-for');
